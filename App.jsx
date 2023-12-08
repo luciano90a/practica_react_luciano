@@ -14,6 +14,8 @@ const App = () => {
     city: '',
     pais: '',
     resumen: '',
+    frameworks:'',
+    hobbies:'',
   });
   
   const getUsers = async () => {
@@ -39,6 +41,9 @@ const App = () => {
       city: user.city,
       pais: user.pais,
       resumen: user.resumen,
+      frameworks:user.frameworks,
+      hobbies:user.hobbies,
+
     });
     setEditModalVisible(true);
   };
@@ -141,6 +146,18 @@ const App = () => {
             value={editedUserData.resumen}
             onChangeText={(text) => setEditedUserData({ ...editedUserData, resumen: text })}
           />
+              <TextInput
+      style={styles.input}
+      placeholder="Frameworks (JSON)"
+      value={editedUserData.frameworks}
+      onChangeText={(text) => setEditedUserData({ ...editedUserData, frameworks: text })}
+    />
+    <TextInput
+      style={styles.input}
+      placeholder="Hobbies (JSON)"
+      value={editedUserData.hobbies}
+      onChangeText={(text) => setEditedUserData({ ...editedUserData, hobbies: text })}
+    />
           <TouchableOpacity onPress={handleEditModalSave}>
             <Text style={styles.modalSaveButton}>Guardar Cambios</Text>
           </TouchableOpacity>
