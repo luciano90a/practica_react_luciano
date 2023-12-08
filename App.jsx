@@ -195,10 +195,30 @@ const App = () => {
                   ></TextInput>
                   <Text>Level: {framework.level}</Text>
                   <TextInput placeholder='ingrese nuevo level' 
-                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                  style={styles.text_for_frameworks_hobbies}
+                  onChangeText={(text) => {
+                    const updatedFrameworks = JSON.parse(selectedUser?.frameworks).map((f, i) => {
+                      if (i === index) {
+                        return { ...f, level: text };
+                      }
+                      return f;
+                    });
+                    setEditedUserData({ ...editedUserData, frameworks: JSON.stringify(updatedFrameworks) });
+                  }}
+                  ></TextInput>
                   <Text>Year: {framework.year}</Text>
                   <TextInput placeholder='ingrese nuevo year'
-                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                  style={styles.text_for_frameworks_hobbies}
+                  onChangeText={(text) => {
+                    const updatedFrameworks = JSON.parse(selectedUser?.frameworks).map((f, i) => {
+                      if (i === index) {
+                        return { ...f, year: text };
+                      }
+                      return f;
+                    });
+                    setEditedUserData({ ...editedUserData, frameworks: JSON.stringify(updatedFrameworks) });
+                  }}
+                  ></TextInput>
                 </View>
               ))}
           </ScrollView>
@@ -211,10 +231,30 @@ const App = () => {
                 <View key={index}>
                   <Text>Name: {hobby.name}</Text>
                   <TextInput placeholder='ingrese nuevo nombre hobbie'
-                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                  style={styles.text_for_frameworks_hobbies}
+                  onChangeText={(text) => {
+                    const updatedhobbies = JSON.parse(selectedUser?.hobbies).map((f, i) => {
+                      if (i === index) {
+                        return { ...f, name: text };
+                      }
+                      return f;
+                    });
+                    setEditedUserData({ ...editedUserData, hobbies: JSON.stringify(updatedhobbies) });
+                  }}
+                  ></TextInput>
                   <Text>Description: {hobby.description}</Text>
                   <TextInput placeholder='ingrese nueva des'
-                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                  style={styles.text_for_frameworks_hobbies}
+                  onChangeText={(text) => {
+                    const updatedhobbies = JSON.parse(selectedUser?.hobbies).map((f, i) => {
+                      if (i === index) {
+                        return { ...f, description: text };
+                      }
+                      return f;
+                    });
+                    setEditedUserData({ ...editedUserData, hobbies: JSON.stringify(updatedhobbies) });
+                  }}
+                  ></TextInput>
                 </View>
               ))}
           </ScrollView>
