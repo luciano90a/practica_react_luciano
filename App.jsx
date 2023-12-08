@@ -97,6 +97,33 @@ const App = () => {
           <Text>Ciudad: {selectedUser?.city}</Text>
           <Text>País: {selectedUser?.pais}</Text>
           <Text>Resumen: {selectedUser?.resumen}</Text>
+          <Text>Email: {selectedUser?.email}</Text>
+
+          {/* ScrollView para frameworks */}
+          <ScrollView style={styles.scrollView}>
+            <Text>Frameworks:</Text>
+            {selectedUser?.frameworks &&
+              JSON.parse(selectedUser?.frameworks).map((framework, index) => (
+                <View key={index}>
+                  <Text>Name: {framework.name}</Text>
+                  <Text>Level: {framework.level}</Text>
+                  <Text>Year: {framework.year}</Text>
+                </View>
+              ))}
+          </ScrollView>
+
+          {/* ScrollView para hobbies */}
+          <ScrollView style={styles.scrollView}>
+            <Text>Hobbies:</Text>
+            {selectedUser?.hobbies &&
+              JSON.parse(selectedUser?.hobbies).map((hobby, index) => (
+                <View key={index}>
+                  <Text>Name: {hobby.name}</Text>
+                  <Text>Description: {hobby.description}</Text>
+                </View>
+              ))}
+          </ScrollView>
+
           <TouchableOpacity onPress={() => setViewModalVisible(false)}>
             <Text style={styles.modalCloseButton}>Cerrar</Text>
           </TouchableOpacity>
@@ -146,18 +173,53 @@ const App = () => {
             value={editedUserData.resumen}
             onChangeText={(text) => setEditedUserData({ ...editedUserData, resumen: text })}
           />
-              <TextInput
-      style={styles.input}
-      placeholder="Frameworks (JSON)"
-      value={editedUserData.frameworks}
-      onChangeText={(text) => setEditedUserData({ ...editedUserData, frameworks: text })}
-    />
-    <TextInput
-      style={styles.input}
-      placeholder="Hobbies (JSON)"
-      value={editedUserData.hobbies}
-      onChangeText={(text) => setEditedUserData({ ...editedUserData, hobbies: text })}
-    />
+          <View style={styles.cont_frameworks}>
+          <ScrollView style={styles.scroll_frameworks}>
+            <Text>Frameworks:</Text>
+            {selectedUser?.frameworks &&
+              JSON.parse(selectedUser?.frameworks).map((framework, index) => (
+                <View key={index}>
+                  <Text>Name: {framework.name}</Text>
+                  <TextInput 
+                  placeholder='ingrese nuevo nombre'
+                  style={styles.text_for_frameworks_hobbies}
+                  onChangeText={(text) => {
+                    const updatedFrameworks = JSON.parse(selectedUser?.frameworks).map((f, i) => {
+                      if (i === index) {
+                        return { ...f, name: text };
+                      }
+                      return f;
+                    });
+                    setEditedUserData({ ...editedUserData, frameworks: JSON.stringify(updatedFrameworks) });
+                  }}
+                  ></TextInput>
+                  <Text>Level: {framework.level}</Text>
+                  <TextInput placeholder='ingrese nuevo level' 
+                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                  <Text>Year: {framework.year}</Text>
+                  <TextInput placeholder='ingrese nuevo year'
+                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                </View>
+              ))}
+          </ScrollView>
+          </View>
+          <View style={styles.cont_hobbies}>
+          <ScrollView style={styles.scroll_hobbies}>
+            <Text>Hobbies:</Text>
+            {selectedUser?.hobbies &&
+              JSON.parse(selectedUser?.hobbies).map((hobby, index) => (
+                <View key={index}>
+                  <Text>Name: {hobby.name}</Text>
+                  <TextInput placeholder='ingrese nuevo nombre hobbie'
+                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                  <Text>Description: {hobby.description}</Text>
+                  <TextInput placeholder='ingrese nueva des'
+                  style={styles.text_for_frameworks_hobbies}></TextInput>
+                </View>
+              ))}
+          </ScrollView>
+          </View>
+        
           <TouchableOpacity onPress={handleEditModalSave}>
             <Text style={styles.modalSaveButton}>Guardar Cambios</Text>
           </TouchableOpacity>
@@ -171,6 +233,36 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  text_for_frameworks_hobbies:{
+    backgroundColor:'gray'
+  },
+  cont_hobbies:{
+    height:'15%',
+    width:'100%',
+    justifyContent:'center',
+    backgroundColor:'green',
+    paddingRight:'10%',
+    alignContent:'center',
+    alignItems:'center',
+    marginTop:'5%'
+  },
+  scroll_hobbies:{
+    alignContent:'center',
+    width:'100%'
+  },
+  cont_frameworks:{
+    height:'15%',
+    width:'100%',
+    justifyContent:'center',
+    backgroundColor:'yellow',
+    paddingRight:'10%',
+    alignContent:'center',
+    alignItems:'center'
+  },
+  scroll_frameworks:{
+    alignContent:'center',
+    width:'100%'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -196,6 +288,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     marginBottom: 16,
+    backgroundColor:'gray'
   },
   userContainer: {
     borderWidth: 1,
@@ -237,6 +330,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-
 
