@@ -97,37 +97,41 @@ const App = () => {
         transparent={true}
         onRequestClose={() => setViewModalVisible(false)}>
         <View style={styles.modalContainer}>
-          <Text>Nombre: {selectedUser?.name}</Text>
-          <Text>Apellido: {selectedUser?.lastname}</Text>
-          <Text>Ciudad: {selectedUser?.city}</Text>
-          <Text>País: {selectedUser?.pais}</Text>
-          <Text>Resumen: {selectedUser?.resumen}</Text>
-          <Text>Email: {selectedUser?.email}</Text>
+          <Text style={styles.text_profile}>Nombre: {selectedUser?.name}</Text>
+          <Text style={styles.text_profile} >Apellido: {selectedUser?.lastname}</Text>
+          <Text style={styles.text_profile} >Ciudad: {selectedUser?.city}</Text>
+          <Text style={styles.text_profile} >País: {selectedUser?.pais}</Text>
+          <Text style={styles.text_profile} >Resumen: {selectedUser?.resumen}</Text>
+          <Text style={styles.text_profile} >Email: {selectedUser?.email}</Text>
 
           {/* ScrollView para frameworks */}
-          <ScrollView style={styles.scrollView}>
-            <Text>Frameworks:</Text>
+          <View style={styles.cont_profile}>
+          <ScrollView style={styles.framework_scroll_profile}>
+            <Text style={styles.tittle_scroll}>Frameworks:</Text>
             {selectedUser?.frameworks &&
               JSON.parse(selectedUser?.frameworks).map((framework, index) => (
                 <View key={index}>
-                  <Text>Name: {framework.name}</Text>
-                  <Text>Level: {framework.level}</Text>
-                  <Text>Year: {framework.year}</Text>
+                  <Text style={styles.text_scroll_profile}>Name: {framework.name}</Text>
+                  <Text style={styles.text_scroll_profile}>Level: {framework.level}</Text>
+                  <Text style={styles.text_scroll_profile}>Year: {framework.year}</Text>
                 </View>
               ))}
           </ScrollView>
-
+          </View>
           {/* ScrollView para hobbies */}
-          <ScrollView style={styles.scrollView}>
-            <Text>Hobbies:</Text>
+          <View style={styles.cont_profile} >
+          <ScrollView style={styles.hobbies_scroll_profile}>
+            <Text style={styles.tittle_scroll}>Hobbies:</Text>
             {selectedUser?.hobbies &&
               JSON.parse(selectedUser?.hobbies).map((hobby, index) => (
                 <View key={index}>
-                  <Text>Name: {hobby.name}</Text>
-                  <Text>Description: {hobby.description}</Text>
+                  <Text style={styles.text_scroll_profile}>Name: {hobby.name}</Text>
+                  <Text style={styles.text_scroll_profile}>Description: {hobby.description}</Text>
                 </View>
               ))}
           </ScrollView>
+          </View>
+          
 
           <TouchableOpacity onPress={() => setViewModalVisible(false)}>
             <Text style={styles.modalCloseButton}>Cerrar</Text>
@@ -178,13 +182,13 @@ const App = () => {
             value={editedUserData.resumen}
             onChangeText={(text) => setEditedUserData({ ...editedUserData, resumen: text })}
           />
-          <View style={styles.cont_frameworks}>
-          <ScrollView style={styles.scroll_frameworks}>
-            <Text>Frameworks:</Text>
+          <View style={styles.cont_profile}>
+          <ScrollView style={styles.framework_scroll_profile}>
+            <Text style={styles.tittle_scroll} >Editar Frameworks:</Text>
             {selectedUser?.frameworks &&
               JSON.parse(selectedUser?.frameworks).map((framework, index) => (
                 <View key={index}>
-                  <Text>Name: {framework.name}</Text>
+                  <Text style={styles.text_scroll_profile}>Name: {framework.name}</Text>
                   <TextInput 
                   placeholder='ingrese nuevo nombre'
                   style={styles.text_for_frameworks_hobbies}
@@ -198,7 +202,7 @@ const App = () => {
                     setEditedUserData({ ...editedUserData, frameworks: JSON.stringify(updatedFrameworks) });
                   }}
                   ></TextInput>
-                  <Text>Level: {framework.level}</Text>
+                  <Text style={styles.text_scroll_profile}>Level: {framework.level}</Text>
                   <TextInput placeholder='ingrese nuevo level' 
                   style={styles.text_for_frameworks_hobbies}
                   onChangeText={(text) => {
@@ -211,7 +215,7 @@ const App = () => {
                     setEditedUserData({ ...editedUserData, frameworks: JSON.stringify(updatedFrameworks) });
                   }}
                   ></TextInput>
-                  <Text>Year: {framework.year}</Text>
+                  <Text style={styles.text_scroll_profile}>Year: {framework.year}</Text>
                   <TextInput placeholder='ingrese nuevo year'
                   style={styles.text_for_frameworks_hobbies}
                   onChangeText={(text) => {
@@ -228,13 +232,14 @@ const App = () => {
               ))}
           </ScrollView>
           </View>
-          <View style={styles.cont_hobbies}>
-          <ScrollView style={styles.scroll_hobbies}>
-            <Text>Hobbies:</Text>
+          <View style={styles.cont_profile}>
+          <ScrollView style={styles.hobbies_scroll_profile}>
+            <Text style={styles.tittle_scroll}>
+              Editar Hobbies:</Text>
             {selectedUser?.hobbies &&
               JSON.parse(selectedUser?.hobbies).map((hobby, index) => (
                 <View key={index}>
-                  <Text>Name: {hobby.name}</Text>
+                  <Text style={styles.text_scroll_profile}> Name: {hobby.name}</Text>
                   <TextInput placeholder='ingrese nuevo nombre hobbie'
                   style={styles.text_for_frameworks_hobbies}
                   onChangeText={(text) => {
@@ -247,7 +252,7 @@ const App = () => {
                     setEditedUserData({ ...editedUserData, hobbies: JSON.stringify(updatedhobbies) });
                   }}
                   ></TextInput>
-                  <Text>Description: {hobby.description}</Text>
+                  <Text style={styles.text_scroll_profile} >Description: {hobby.description}</Text>
                   <TextInput placeholder='ingrese nueva des'
                   style={styles.text_for_frameworks_hobbies}
                   onChangeText={(text) => {
@@ -278,18 +283,70 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  tittle_scroll:{
+    fontSize:20,
+    textAlign:'center',
+    color:'black'
+  },
+  text_scroll_profile:{
+    fontSize:18,
+    color:'black',
+    fontFamily:'fantasy',
+    backgroundColor:'goldenrod',
+    textAlign:'center',
+    borderRadius:50,
+    margin:5,
+    borderColor:'yellow',
+    borderWidth:4
+  },
+  cont_profile:{
+    height:'15%',
+    width:'100%',
+    justifyContent:'center',
+    backgroundColor:'green',
+    alignContent:'center',
+    alignItems:'center',
+    marginTop:'5%',
+    borderColor:'blue',
+    borderWidth:2
+  },
+  hobbies_scroll_profile:{
+    backgroundColor:'lightgreen',
+    position:'relative',
+    width:'100%',
+    
+  },
+  framework_scroll_profile:{
+    backgroundColor:'lightgreen',
+    position:'relative',
+    width:'100%',
+    
+    
+  },
+  text_profile:{
+    fontSize:18,
+    color:'black',
+    backgroundColor:'lightgreen',
+    borderRadius:30,
+    marginTop:'5%',
+    padding:'3%',
+    borderColor:'yellow',
+    borderWidth:5,
+    textAlign:"center",
+    fontFamily:'fantasy'
+  },
   buton_scroll_edit:{
-    
     marginLeft:'70%',
-    
-
   },
   cont_butons:{
     flexDirection:'row',
     
   },
   text_for_frameworks_hobbies:{
-    backgroundColor:'gray'
+    backgroundColor:'white',
+    margin:'1%',
+    borderColor:'yellow',
+    borderWidth:3
   },
   cont_hobbies:{
     height:'15%',
@@ -365,27 +422,42 @@ const styles = StyleSheet.create({
     paddingTop:'2%'
   },
   modalContainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     padding: 16,
   },
   modalCloseButton: {
-    color: 'red',
+    color: 'black',
     marginTop: 16,
+    backgroundColor:'red',
+    fontSize:18,
+    borderRadius:10,
+    borderColor:'blue',
+    borderWidth:2,
+    fontFamily:'fantasy'
   },
   modalSaveButton: {
-    color: 'green',
+    color: 'black',
     marginTop: 16,
+    backgroundColor:'aquamarine',
+    fontSize:18,
+    borderRadius:10,
+    borderColor:'blue',
+    borderWidth:2,
+    fontFamily:'fantasy'
+
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'blue',
+    backgroundColor:'white',
+    borderWidth:4,
     borderRadius: 5,
     marginBottom: 8,
     padding: 8,
-    width: '100%',
+    width: '100%',  
   },
   textinfo:{
     backgroundColor:'yellow',
