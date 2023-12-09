@@ -72,15 +72,20 @@ const App = () => {
         {users.map((user) => (
           
           <View key={user.id} style={styles.userContainer}>
-           
-            <Text>ID: {user.id}</Text>
-            <Text>Nombre: {user.name}</Text>
-            <TouchableOpacity onPress={() => handleViewProfile(user)}>
+            <Text style={styles.textinfo}>ID: {user.id}</Text>
+            <Text style={styles.textinfo} >Nombre: {user.name}</Text>
+            <View style={styles.cont_butons}>
+            <TouchableOpacity onPress={() => handleViewProfile(user)}
+            style={styles.buton_scroll_profile}
+            >
               <Text style={styles.profileButton}>Ver Perfil</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleEditProfile(user)}>
+            <TouchableOpacity onPress={() => handleEditProfile(user)}
+             style={styles.buton_scroll_edit}
+            >
               <Text style={styles.editButton}>Editar</Text>
             </TouchableOpacity>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -273,6 +278,16 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  buton_scroll_edit:{
+    
+    marginLeft:'70%',
+    
+
+  },
+  cont_butons:{
+    flexDirection:'row',
+    
+  },
   text_for_frameworks_hobbies:{
     backgroundColor:'gray'
   },
@@ -321,28 +336,33 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   buttonText: {
-    color: 'blue',
+    color: 'darkblue',
     fontSize: 16,
+    fontFamily:'Cooper Black'
   },
   scrollView: {
     flex: 1,
     width: '100%',
-    marginBottom: 16,
-    backgroundColor:'gray'
+    marginBottom: 20,
+    backgroundColor:'gray',
+    
+    
   },
   userContainer: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 8,
-    marginBottom: 8,
+    borderWidth: 10,
+    borderColor: 'yellow',
+    padding: 20,
+    marginBottom: '5%',
   },
   profileButton: {
-    color: 'green',
-    marginTop: 8,
+    color: 'black',
+    paddingTop:'2%',
+    borderRadius:10,
+    
   },
   editButton: {
-    color: 'blue',
-    marginTop: 8,
+    color: 'black',
+    paddingTop:'2%'
   },
   modalContainer: {
     flex: 1,
@@ -367,6 +387,17 @@ const styles = StyleSheet.create({
     padding: 8,
     width: '100%',
   },
+  textinfo:{
+    backgroundColor:'yellow',
+    padding:'1%',
+    textAlign:'center',
+    color:'black',
+    width:'50%',
+    marginLeft:'28%',
+    borderRadius:50,
+    marginTop:'2%',
+    
+  }
 });
 
 export default App;
